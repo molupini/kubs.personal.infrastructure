@@ -38,5 +38,5 @@ spec:
         - name: kube-state-metrics
           image: quay.io/coreos/kube-state-metrics:latest
           ports:
-          - containerPort: 30900
+          - containerPort: 9090
             name: metrics
