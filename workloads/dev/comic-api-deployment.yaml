@@ -16,19 +16,20 @@ kind: Deployment
 metadata:
   namespace: dev
   name: comic-api-service
+
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: comic-api
-    annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/path: 'swagger-stats/metrics'
-      prometheus.io/port: '3000'
   template:
     metadata:
       labels:
         app: comic-api
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: 'swagger-stats/metrics'
+        prometheus.io/port: '3000'
     spec:
       containers:
       - name: comic-api
