@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev
+  name: comic-api
+spec:
+  selector:
+    app: comic-api
+  type: LoadBalancer
+  ports:
+  - port: 30902
+    targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: dev
+  name: comic-api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comic-api
+    annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: 'swagger-stats/metrics'
+        prometheus.io/port: '3000'
+  template:
+    metadata:
+      labels:
+        app: comic-api
+    spec:
+      containers:
+      - name: comic-api
+        image: mauriziolupini/comic-book-api:dev1.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+
