@@ -10,7 +10,7 @@ metadata:
 spec:
   ports:
   - name: metrics
-    port: 9090
+    port: 8080
     targetPort: metrics
     protocol: TCP
   selector:
@@ -38,5 +38,5 @@ spec:
         - name: kube-state-metrics
           image: quay.io/coreos/kube-state-metrics:latest
           ports:
-          - containerPort: 9090
+          - containerPort: 8080
             name: metrics
