@@ -18,5 +18,5 @@ data:
       slack_configs:
       - send_resolved: true
         username: 'molupini.dev'
-        api_url: 'https://hooks.slack.com/services/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'
+        api_url: ''
         channel: '#alerts'
