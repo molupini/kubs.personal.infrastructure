@@ -67,13 +67,6 @@ data:
             severity: critical
           annotations:
             description: API server returns errors for {{ $value }}% of requests
-        - alert: KubernetesAPIServerDown
-          expr: up{job="kubernetes-apiservers"} == 0
-          for: 10m
-          labels:
-            severity: critical
-          annotations:
-            summary: Apiserver {{ $labels.instance }} is down!
         - alert: KubernetesAPIServersGone
           expr:  absent(up{job="kubernetes-apiservers"})
           for: 10m
