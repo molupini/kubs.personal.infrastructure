@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-read-rules-conf
+  labels:
+    name: prometheus-read-rules-conf
+  namespace: monitoring
+data:
+  node_rules.yml: |-
+    groups:
+    - name: node_rules
+      interval: 10s
+      rules:
+        - record: container:container_cpu_usage_seconds_total:avg_rate5m
+          expr: 100 - avg(irate(container_cpu_usage_seconds_total[5m])) by (instance) * 100
+        - record: container:container_memory_usage_bytes:percentage
+          expr: avg(container_memory_usage_bytes / container_memory_max_usage_bytes * 100) by (pod)
+

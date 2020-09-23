@@ -16,7 +16,6 @@ kind: Deployment
 metadata:
   namespace: dev
   name: comic-api-service
-
 spec:
   replicas: 1
   selector:
